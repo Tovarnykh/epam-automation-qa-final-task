@@ -1,0 +1,24 @@
+-------------------------------------------------------------------------------
+Test set: com.epam.tovarnykh.ta.saucedemo.test.UserLoginTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 45.823 s <<< FAILURE! - in com.epam.tovarnykh.ta.saucedemo.test.UserLoginTest
+shouldShowErrorWhenLoginWithEmptyCredentials{User}[2]  Time elapsed: 8.274 s  <<< ERROR!
+org.openqa.selenium.TimeoutException: 
+Expected condition failed: waiting for visibility of element located by By.xpath: //h3[@data-test='error'] (tried for 2 second(s) with 500 milliseconds interval)
+Build info: version: '4.23.0', revision: '4df0a231af'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.1'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 127.0.2651.98, fedcm:accounts: true, ms:edgeOptions: {debuggerAddress: localhost:49611}, msedge: {msedgedriverVersion: 127.0.2651.98 (9996f88545e1..., userDataDir: C:\Users\milas\AppData\Loca...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:49611/devtoo..., se:cdpVersion: 127.0.2651.98, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 58b280e98430b1651a02cfe0bfec032a
+	at com.epam.tovarnykh.ta.saucedemo.test.UserLoginTest.shouldShowErrorWhenLoginWithEmptyCredentials(UserLoginTest.java:36)
+
+shouldShowErrorWhenPasswordIsMissing{User}[2]  Time elapsed: 7.595 s  <<< ERROR!
+org.openqa.selenium.TimeoutException: 
+Expected condition failed: waiting for visibility of element located by By.xpath: //h3[@data-test='error'] (tried for 2 second(s) with 500 milliseconds interval)
+Build info: version: '4.23.0', revision: '4df0a231af'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.1'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 127.0.2651.98, fedcm:accounts: true, ms:edgeOptions: {debuggerAddress: localhost:49834}, msedge: {msedgedriverVersion: 127.0.2651.98 (9996f88545e1..., userDataDir: C:\Users\milas\AppData\Loca...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:49834/devtoo..., se:cdpVersion: 127.0.2651.98, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 92762b3625042cfd5cf466276d4e6e9c
+	at com.epam.tovarnykh.ta.saucedemo.test.UserLoginTest.shouldShowErrorWhenPasswordIsMissing(UserLoginTest.java:63)
+

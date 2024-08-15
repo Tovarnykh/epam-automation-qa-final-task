@@ -1,15 +1,14 @@
 package com.epam.tovarnykh.ta.saucedemo.test;
 
-import com.epam.tovarnykh.ta.driver.Browser;
-import com.epam.tovarnykh.ta.driver.WebDriverFactory;
 import com.epam.tovarnykh.ta.saucedemo.model.User;
-import com.epam.tovarnykh.ta.saucedemo.page.LoginPage;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import static com.epam.tovarnykh.ta.saucedemo.constants.LoginPageConstants.ERROR_MESSAGE_STARTER;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 public class UserLoginTest extends CommonConditions {
 
@@ -26,15 +25,17 @@ public class UserLoginTest extends CommonConditions {
                 .setPasswordValue(user.getPassword());
 
         //And: Clear the inputs in login and password
-        loginPage.clearLoginValue();
-               // .clearPasswordValue();
+        loginPage.clearLoginValue()
+                .clearPasswordValue();
 
         //And: Hit on "Login" button
         loginPage.clickLoginButton();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
+
         //Then: Check the error messages: "Username is required"
-        assertEquals(ERROR_MESSAGE_STARTER + "Username is required", loginPage.getErrorMessage(),
-                "The error text does not match the expected error text.");
+        assertThat("The error text does not match the expected error text.",
+                loginPage.getErrorMessage(),
+                is(equalTo(ERROR_MESSAGE_STARTER + "Username is required")));
 
     }
 
@@ -59,8 +60,9 @@ public class UserLoginTest extends CommonConditions {
 //        loginPage.clickLoginButton();
 //
 //        // Then: An error message "Password is required" should be displayed
-//            assertEquals(ERROR_MESSAGE_STARTER + "Password is required", loginPage.getErrorMessage(),
-//                    "The error text does not match the expected error text.");
+//        assertThat("The error text does not match the expected error text.",
+//                loginPage.getErrorMessage(),
+//                is(equalTo(ERROR_MESSAGE_STARTER + "Password is required")));
 //    }
 //
 //    @ParameterizedTest
@@ -82,8 +84,9 @@ public class UserLoginTest extends CommonConditions {
 //        inventoryPage.getTitle();
 //
 //        // Then: The user should be navigated to the dashboard with the title "Swag Labs"
-//        assertEquals("Swag Labs", inventoryPage.getTitle(),
-//                "The title has not been seen");
+//        assertThat("The title is not as expected.",
+//                inventoryPage.getTitle(),
+//                is(equalTo("Swag Labs")));
 //    }
 
 }

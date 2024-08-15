@@ -23,10 +23,12 @@ public class InventoryPage extends AbstractPage{
     @Override
     public InventoryPage openPage() {
         driver.get(INVENTORY_PAGE_LINK);
+        logger.info("Login page is open");
         return this;
     }
 
     public String getTitle(){
+        logger.info("Dashboard title sent");
         return title.getText();
     }
 

@@ -2,7 +2,7 @@ package com.epam.tovarnykh.ta.driver;
 
 import org.openqa.selenium.WebDriver;
 
-public class WebDriverFactory {
+public class DriverSingleton {
 
     public static WebDriver getDriver(Browser type) {
 
