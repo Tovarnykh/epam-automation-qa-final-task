@@ -1,6 +1,7 @@
 package com.epam.tovarnykh.ta.saucedemo.model.config;
 
 import com.epam.tovarnykh.ta.saucedemo.model.User;
+import com.epam.tovarnykh.ta.saucedemo.test.CommonConditions;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
