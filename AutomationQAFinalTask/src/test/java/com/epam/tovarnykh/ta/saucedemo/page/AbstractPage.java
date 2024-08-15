@@ -8,7 +8,6 @@ public abstract class AbstractPage {
 
     protected static final Logger logger = LoggerFactory.getLogger(LoginPage.class);
 
-
     protected WebDriver driver;
 
     protected abstract AbstractPage openPage();

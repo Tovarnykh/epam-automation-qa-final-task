@@ -1,14 +1,14 @@
 D:\Java\epam-automation-qa-final-task\AutomationQAFinalTask\src\test\java\com\epam\tovarnykh\ta\driver\DriverSingleton.java
 D:\Java\epam-automation-qa-final-task\AutomationQAFinalTask\src\test\java\com\epam\tovarnykh\ta\driver\DriverManager.java
-D:\Java\epam-automation-qa-final-task\AutomationQAFinalTask\src\test\java\com\epam\tovarnykh\ta\saucedemo\constants\LoginPageConstants.java
 D:\Java\epam-automation-qa-final-task\AutomationQAFinalTask\src\test\java\com\epam\tovarnykh\ta\saucedemo\page\InventoryPage.java
 D:\Java\epam-automation-qa-final-task\AutomationQAFinalTask\src\test\java\com\epam\tovarnykh\ta\saucedemo\page\LoginPage.java
-D:\Java\epam-automation-qa-final-task\AutomationQAFinalTask\src\test\java\com\epam\tovarnykh\ta\saucedemo\constants\InventoryPageConstants.java
 D:\Java\epam-automation-qa-final-task\AutomationQAFinalTask\src\test\java\com\epam\tovarnykh\ta\saucedemo\model\config\UserAdapter.java
+D:\Java\epam-automation-qa-final-task\AutomationQAFinalTask\src\test\java\com\epam\tovarnykh\ta\saucedemo\page\constants\InventoryPageConstants.java
 D:\Java\epam-automation-qa-final-task\AutomationQAFinalTask\src\test\java\com\epam\tovarnykh\ta\driver\EdgeDriverManager.java
 D:\Java\epam-automation-qa-final-task\AutomationQAFinalTask\src\test\java\com\epam\tovarnykh\ta\saucedemo\page\AbstractPage.java
 D:\Java\epam-automation-qa-final-task\AutomationQAFinalTask\src\test\java\com\epam\tovarnykh\ta\saucedemo\test\CommonConditions.java
 D:\Java\epam-automation-qa-final-task\AutomationQAFinalTask\src\test\java\com\epam\tovarnykh\ta\driver\FirefoxDriverManager.java
 D:\Java\epam-automation-qa-final-task\AutomationQAFinalTask\src\test\java\com\epam\tovarnykh\ta\saucedemo\model\User.java
+D:\Java\epam-automation-qa-final-task\AutomationQAFinalTask\src\test\java\com\epam\tovarnykh\ta\saucedemo\page\constants\LoginPageConstants.java
 D:\Java\epam-automation-qa-final-task\AutomationQAFinalTask\src\test\java\com\epam\tovarnykh\ta\saucedemo\test\UserLoginTest.java
 D:\Java\epam-automation-qa-final-task\AutomationQAFinalTask\src\test\java\com\epam\tovarnykh\ta\driver\Browser.java

@@ -4,8 +4,12 @@ import com.epam.tovarnykh.ta.saucedemo.model.User;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.openqa.selenium.NoSuchElementException;
+import org.opentest4j.AssertionFailedError;
 
-import static com.epam.tovarnykh.ta.saucedemo.constants.LoginPageConstants.ERROR_MESSAGE_STARTER;
+import static com.epam.tovarnykh.ta.saucedemo.page.constants.InventoryPageConstants.DASHBOARD_TITLE_SELECTOR;
+import static com.epam.tovarnykh.ta.saucedemo.page.constants.InventoryPageConstants.INVENTORY_PAGE_LINK;
+import static com.epam.tovarnykh.ta.saucedemo.page.constants.LoginPageConstants.ERROR_MESSAGE_STARTER;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -32,10 +36,9 @@ public class UserLoginTest extends CommonConditions {
         loginPage.clickLoginButton();
 
         //Then: Check the error messages: "Username is required"
-        assertThat("The error text does not match the expected error text.",
+        assertThat("The login error text does not match the expected error text.",
                 loginPage.getErrorMessage(),
                 is(equalTo(ERROR_MESSAGE_STARTER + "Username is required")));
-
     }
 
     @ParameterizedTest
@@ -59,7 +62,7 @@ public class UserLoginTest extends CommonConditions {
         loginPage.clickLoginButton();
 
         // Then: An error message "Password is required" should be displayed
-        assertThat("The error text does not match the expected error text.",
+        assertThat("The password error text does not match the expected text.",
                 loginPage.getErrorMessage(),
                 is(equalTo(ERROR_MESSAGE_STARTER + "Password is required")));
     }
@@ -78,14 +81,20 @@ public class UserLoginTest extends CommonConditions {
         //And: Enter password as secret sauce.
         loginPage.setPasswordValue("secret_sauce");
 
-        // And: Click on Login and validate the title “Swag Labs” in the dashboard.
+        // Then: Click on Login and validate the title “Swag Labs” in the dashboard.
         loginPage.clickLoginButton();
-        inventoryPage.getTitle();
-
-        // Then: The user should be navigated to the dashboard with the title "Swag Labs"
-        assertThat("The title is not as expected.",
-                inventoryPage.getTitle(),
-                is(equalTo("Swag Labs")));
+        try {
+            assertThat("The title is not as expected.",
+                    inventoryPage.getTitle(),
+                    is(equalTo("Swag Labs")));
+        } catch (NoSuchElementException e) {
+            logger.error("Unable to locate element:" + DASHBOARD_TITLE_SELECTOR);
+            if (driver.getCurrentUrl() != INVENTORY_PAGE_LINK) {
+                throw new AssertionError("An attempt to log in into account was unsuccessful.");
+            } else {
+                throw new AssertionFailedError(e.toString());
+            }
+        }
     }
 
 }

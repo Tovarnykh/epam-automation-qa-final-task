@@ -1,4 +1,4 @@
-package com.epam.tovarnykh.ta.saucedemo.constants;
+package com.epam.tovarnykh.ta.saucedemo.page.constants;
 
 public class LoginPageConstants {
 

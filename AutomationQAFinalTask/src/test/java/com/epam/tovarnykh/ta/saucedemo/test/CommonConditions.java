@@ -8,11 +8,15 @@ import com.epam.tovarnykh.ta.saucedemo.page.InventoryPage;
 import com.epam.tovarnykh.ta.saucedemo.page.LoginPage;
 import org.junit.jupiter.api.AfterEach;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.stream.Stream;
 
 public class CommonConditions {
+
+    protected static final Logger logger = LoggerFactory.getLogger(LoginPage.class);
 
     protected WebDriver driver;
     protected LoginPage loginPage;

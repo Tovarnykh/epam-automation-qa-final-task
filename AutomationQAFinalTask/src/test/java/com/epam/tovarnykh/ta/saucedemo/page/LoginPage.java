@@ -8,7 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static com.epam.tovarnykh.ta.saucedemo.constants.LoginPageConstants.*;
+import static com.epam.tovarnykh.ta.saucedemo.page.constants.InventoryPageConstants.INVENTORY_PAGE_LINK;
+import static com.epam.tovarnykh.ta.saucedemo.page.constants.LoginPageConstants.*;
 
 public class LoginPage extends AbstractPage {
 
@@ -71,6 +72,9 @@ public class LoginPage extends AbstractPage {
     public LoginPage clickLoginButton() {
         loginButton.click();
         logger.info("Login button clicked");
+        if(driver.getCurrentUrl().equals(INVENTORY_PAGE_LINK)){
+            logger.info("Inventory page is open");
+        }
         return this;
     }
 
