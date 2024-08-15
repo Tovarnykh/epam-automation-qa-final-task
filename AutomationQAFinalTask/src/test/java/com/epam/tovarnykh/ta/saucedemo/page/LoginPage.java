@@ -1,10 +1,6 @@
 package com.epam.tovarnykh.ta.saucedemo.page;
 
-import org.apache.commons.logging.Log;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,15 +10,15 @@ import java.time.Duration;
 
 import static com.epam.tovarnykh.ta.saucedemo.constants.LoginPageConstants.*;
 
-public class LoginPage extends AbstractPage{
+public class LoginPage extends AbstractPage {
 
     private WebDriverWait wait;
 
     @FindBy(xpath = LOGIN_INPUT_SELECTOR)
-    private WebElement loginInput;
+    private WebElement loginField;
 
     @FindBy(xpath = PASSWORD_INPUT_SELECTOR)
-    private WebElement passwordInput;
+    private WebElement passwordField;
 
     @FindBy(xpath = LOGIN_BUTTON_SELECTOR)
     private WebElement loginButton;
@@ -42,40 +38,43 @@ public class LoginPage extends AbstractPage{
         return this;
     }
 
-    public LoginPage setLoginValue(String userName){
-        loginInput.clear();
-        loginInput.sendKeys(userName);
+    public LoginPage setLoginValue(String userName) {
+        loginField.clear();
+        loginField.sendKeys(userName);
         logger.info("Login was entered inside the login input: {}", userName);
         return this;
     }
 
-    public LoginPage clearLoginValue(){
-        loginInput.clear();
+    public LoginPage clearLoginValue() {
+        loginField.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        loginField.sendKeys(Keys.BACK_SPACE);
+        loginField.sendKeys(Keys.ENTER);
         logger.info("Login input cleared");
         return this;
     }
 
-    public LoginPage setPasswordValue(String password){
-        passwordInput.clear();
-        passwordInput.sendKeys(password);
+    public LoginPage setPasswordValue(String password) {
+        passwordField.clear();
+        passwordField.sendKeys(password);
         logger.info("Password was entered inside the password input");
         return this;
     }
 
-    public LoginPage clearPasswordValue(){
-        passwordInput.clear();
+    public LoginPage clearPasswordValue() {
+        passwordField.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        passwordField.sendKeys(Keys.BACK_SPACE);
+        passwordField.sendKeys(Keys.ENTER);
         logger.info("Password input cleared");
         return this;
     }
 
-    public LoginPage clickLoginButton() throws InterruptedException {
-        Thread.sleep(2000);
+    public LoginPage clickLoginButton() {
         loginButton.click();
         logger.info("Login button clicked");
         return this;
     }
 
-    public String getErrorMessage(){
+    public String getErrorMessage() {
         WebElement errorMessageElement = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_SELECTOR))
         );
