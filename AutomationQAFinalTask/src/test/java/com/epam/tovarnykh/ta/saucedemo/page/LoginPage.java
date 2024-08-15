@@ -2,14 +2,21 @@ package com.epam.tovarnykh.ta.saucedemo.page;
 
 import org.apache.commons.logging.Log;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 import static com.epam.tovarnykh.ta.saucedemo.constants.LoginPageConstants.*;
 
 public class LoginPage extends AbstractPage{
+
+    private WebDriverWait wait;
 
     @FindBy(xpath = LOGIN_INPUT_SELECTOR)
     private WebElement loginInput;
@@ -22,6 +29,8 @@ public class LoginPage extends AbstractPage{
 
     public LoginPage(WebDriver driver) {
         super(driver);
+
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 
         PageFactory.initElements(driver, this);
     }
@@ -54,13 +63,16 @@ public class LoginPage extends AbstractPage{
         return this;
     }
 
-    public LoginPage clickLoginButton(){
+    public LoginPage clickLoginButton() {
         loginButton.click();
         return this;
     }
 
     public String getErrorMessage(){
-        return driver.findElement(By.xpath(ERROR_MESSAGE_SELECTOR)).getText();
+        WebElement errorMessageElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_SELECTOR))
+        );
+        return errorMessageElement.getText();
     }
 
 }

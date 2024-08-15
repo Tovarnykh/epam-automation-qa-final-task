@@ -15,8 +15,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.stream.Stream;
 
-import static com.epam.tovarnykh.ta.saucedemo.constants.LoginPageConstants.LOGIN_PAGE_LINK;
-
 public class CommonConditions {
 
     protected static final Logger logger = LoggerFactory.getLogger(LoginPage.class);
@@ -39,6 +37,7 @@ public class CommonConditions {
 
     protected void setUpBrowser(Browser browser){
         driver = WebDriverFactory.getDriver(browser);
+        driver.manage().window().maximize();
         loginPage = new LoginPage(driver);
         inventoryPage = new InventoryPage(driver);
     }
