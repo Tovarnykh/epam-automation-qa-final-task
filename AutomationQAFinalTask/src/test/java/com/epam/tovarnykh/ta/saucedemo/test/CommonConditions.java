@@ -24,8 +24,8 @@ public class CommonConditions {
 
     static Stream<User> provideUserConfigurations() throws IOException {
         return Stream.of(
-                UserAdapter.loadConfig("qaUserProperties1.json"),
-                UserAdapter.loadConfig("qaUserProperties2.json")
+                UserAdapter.loadUserProperty("qaUserProperties1.json"),
+                UserAdapter.loadUserProperty("qaUserProperties2.json")
         );
     }
 

@@ -24,6 +24,11 @@ public class LoginPage extends AbstractPage {
     @FindBy(xpath = LOGIN_BUTTON_SELECTOR)
     private WebElement loginButton;
 
+    /**
+     * Constructor to initialize the {@code LoginPage} object.
+     *
+     * @param driver the WebDriver instance used to interact with the browser.
+     */
     public LoginPage(WebDriver driver) {
         super(driver);
 
@@ -32,6 +37,11 @@ public class LoginPage extends AbstractPage {
         PageFactory.initElements(driver, this);
     }
 
+    /**
+     * Opens the login page by navigating to the login page URL.
+     *
+     * @return the {@code LoginPage} instance for method chaining.
+     */
     @Override
     public LoginPage openPage() {
         driver.get(LOGIN_PAGE_LINK);
@@ -39,14 +49,25 @@ public class LoginPage extends AbstractPage {
         return this;
     }
 
-    public LoginPage setLoginValue(String userName) {
+    /**
+     * Enters the login value in the username input field.
+     *
+     * @param userName the username to be entered.
+     * @return the {@code LoginPage} instance for method chaining.
+     */
+    public LoginPage enterUserName(String userName) {
         loginField.clear();
         loginField.sendKeys(userName);
         logger.info("Login was entered inside the login input: {}", userName);
         return this;
     }
 
-    public LoginPage clearLoginValue() {
+    /**
+     * Clears the login input field.
+     *
+     * @return the {@code LoginPage} instance for method chaining.
+     */
+    public LoginPage clearUserName() {
         loginField.sendKeys(Keys.chord(Keys.CONTROL, "a"));
         loginField.sendKeys(Keys.BACK_SPACE);
         loginField.sendKeys(Keys.ENTER);
@@ -54,14 +75,25 @@ public class LoginPage extends AbstractPage {
         return this;
     }
 
-    public LoginPage setPasswordValue(String password) {
+    /**
+     * Enters the password value in the password input field.
+     *
+     * @param password the password to be entered.
+     * @return the {@code LoginPage} instance for method chaining.
+     */
+    public LoginPage enterPassword(String password) {
         passwordField.clear();
         passwordField.sendKeys(password);
         logger.info("Password was entered inside the password input");
         return this;
     }
 
-    public LoginPage clearPasswordValue() {
+    /**
+     * Clears the password input field.
+     *
+     * @return the {@code LoginPage} instance for method chaining.
+     */
+    public LoginPage clearPassword() {
         passwordField.sendKeys(Keys.chord(Keys.CONTROL, "a"));
         passwordField.sendKeys(Keys.BACK_SPACE);
         passwordField.sendKeys(Keys.ENTER);
@@ -69,7 +101,13 @@ public class LoginPage extends AbstractPage {
         return this;
     }
 
-    public LoginPage clickLoginButton() {
+    /**
+     * Clicks the login button on the login page.
+     * If the user is successfully logged in, it logs that the inventory page is open.
+     *
+     * @return the {@code LoginPage} instance for method chaining.
+     */
+    public LoginPage clickLogin() {
         loginButton.click();
         logger.info("Login button clicked");
         if(driver.getCurrentUrl().equals(INVENTORY_PAGE_LINK)){
@@ -78,7 +116,12 @@ public class LoginPage extends AbstractPage {
         return this;
     }
 
-    public String getErrorMessage() {
+    /**
+     * Retrieves the error message displayed on the login page.
+     *
+     * @return the error message as a {@code String}.
+     */
+    public String retrieveErrorMessageDisplayed() throws NoSuchElementException, TimeoutException {
         WebElement errorMessageElement = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_SELECTOR))
         );

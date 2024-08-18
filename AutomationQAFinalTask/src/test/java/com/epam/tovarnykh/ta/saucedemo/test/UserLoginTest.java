@@ -5,11 +5,12 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.opentest4j.AssertionFailedError;
 
 import static com.epam.tovarnykh.ta.saucedemo.page.constants.InventoryPageConstants.DASHBOARD_TITLE_SELECTOR;
 import static com.epam.tovarnykh.ta.saucedemo.page.constants.InventoryPageConstants.INVENTORY_PAGE_LINK;
-import static com.epam.tovarnykh.ta.saucedemo.page.constants.LoginPageConstants.ERROR_MESSAGE_STARTER;
+import static com.epam.tovarnykh.ta.saucedemo.page.constants.LoginPageConstants.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -25,20 +26,29 @@ public class UserLoginTest extends CommonConditions {
         loginPage.openPage();
 
         //When: Type any credentials into "Username" & "Password" fields
-        loginPage.setLoginValue(user.getUserName())
-                .setPasswordValue(user.getPassword());
+        loginPage.enterUserName(user.getUserName())
+                .enterPassword(user.getPassword());
 
         //And: Clear the inputs in login and password
-        loginPage.clearLoginValue()
-                .clearPasswordValue();
+        loginPage.clearUserName()
+                .clearPassword();
 
         //And: Hit on "Login" button
-        loginPage.clickLoginButton();
+        loginPage.clickLogin();
 
         //Then: Check the error messages: "Username is required"
-        assertThat("The login error text does not match the expected error text.",
-                loginPage.getErrorMessage(),
-                is(equalTo(ERROR_MESSAGE_STARTER + "Username is required")));
+        try {
+            assertThat("The login error text does not match the expected error text.",
+                    loginPage.retrieveErrorMessageDisplayed(),
+                    is(equalTo(ERROR_MESSAGE_STARTER + "Username is required")));
+        } catch (NoSuchElementException | TimeoutException e) {
+            logger.error("Unable to locate element:" + ERROR_MESSAGE_SELECTOR);
+            if (driver.getCurrentUrl() != LOGIN_PAGE_LINK) {
+                throw new AssertionError("Login was successful, the program did not work as planned.");
+            } else {
+                throw new AssertionFailedError("The error message did not appear on the page.\n" + e);
+            }
+        }
     }
 
     @ParameterizedTest
@@ -50,21 +60,30 @@ public class UserLoginTest extends CommonConditions {
         loginPage.openPage();
 
         // When: Type any credentials in username and password.
-        loginPage.setLoginValue(user.getUserName());
+        loginPage.enterUserName(user.getUserName());
 
         //And: Enter password
-        loginPage.setPasswordValue(user.getPassword());
+        loginPage.enterPassword(user.getPassword());
 
         //And: Clear the "Password" input.
-        loginPage.clearPasswordValue();
+        loginPage.clearPassword();
 
         // And: Hit on "Login" button
-        loginPage.clickLoginButton();
+        loginPage.clickLogin();
 
         // Then: An error message "Password is required" should be displayed
-        assertThat("The password error text does not match the expected text.",
-                loginPage.getErrorMessage(),
-                is(equalTo(ERROR_MESSAGE_STARTER + "Password is required")));
+        try {
+            assertThat("The password error text does not match the expected text.",
+                    loginPage.retrieveErrorMessageDisplayed(),
+                    is(equalTo(ERROR_MESSAGE_STARTER + "Password is required")));
+        } catch (NoSuchElementException e) {
+            logger.error("Unable to locate element:" + ERROR_MESSAGE_SELECTOR);
+            if (driver.getCurrentUrl() != LOGIN_PAGE_LINK) {
+                throw new AssertionError("Login was successful, the program did not work as planned.");
+            } else {
+                throw new AssertionFailedError("The error message did not appear on the page.\n" + e);
+            }
+        }
     }
 
     @ParameterizedTest
@@ -76,16 +95,16 @@ public class UserLoginTest extends CommonConditions {
         loginPage.openPage();
 
         // When: Type credentials in username which are under Accepted username are sections.
-        loginPage.setLoginValue("standard_user");
+        loginPage.enterUserName("standard_user");
 
         //And: Enter password as secret sauce.
-        loginPage.setPasswordValue("secret_sauce");
+        loginPage.enterPassword("secret_sauce");
 
         // Then: Click on Login and validate the title “Swag Labs” in the dashboard.
-        loginPage.clickLoginButton();
+        loginPage.clickLogin();
         try {
             assertThat("The title is not as expected.",
-                    inventoryPage.getTitle(),
+                    inventoryPage.retrieveDashboardTitle(),
                     is(equalTo("Swag Labs")));
         } catch (NoSuchElementException e) {
             logger.error("Unable to locate element:" + DASHBOARD_TITLE_SELECTOR);

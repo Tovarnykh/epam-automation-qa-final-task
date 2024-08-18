@@ -1,10 +1,15 @@
 # SauceDemo Login Tests
 
-This project contains automated tests for the login functionality on the SauceDemo website. Made by Tovarnykh Viktor.
+This project contains automated tests for the login functionality on the SauceDemo website.
+
+The project uses Selenium WebDriver, Maven, and JUnit. 
+The tests are written in BDD style, assertyion library - hamcrest.
+
+Made by Tovarnykh Viktor.
 
 ## Task Description
 
-- **UC-1**: UC-1 Test Login form with empty credentials:
+- **UC-1**: Test Login form with empty credentials:
 
 	Type any credentials into "Username" and "Password" fields.
 
@@ -33,8 +38,6 @@ This project contains automated tests for the login functionality on the SauceDe
 	Enter password as secret sauce.
 
 	Click on Login and validate the title “Swag Labs” in the dashboard.
-
-	The project uses Selenium WebDriver, Maven, and JUnit. The tests are written in BDD style using Cucumber.
 
 ## Additional requirements
 
