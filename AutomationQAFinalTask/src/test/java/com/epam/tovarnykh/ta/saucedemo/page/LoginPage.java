@@ -8,10 +8,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static com.epam.tovarnykh.ta.saucedemo.page.constants.InventoryPageConstants.INVENTORY_PAGE_LINK;
-import static com.epam.tovarnykh.ta.saucedemo.page.constants.LoginPageConstants.*;
+import static com.epam.tovarnykh.ta.saucedemo.util.Constants.INVENTORY_PAGE_LINK;
+import static com.epam.tovarnykh.ta.saucedemo.util.Constants.LOGIN_PAGE_LINK;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
 
 public class LoginPage extends AbstractPage {
+
+    public static final String LOGIN_INPUT_SELECTOR = "//input[@id='user-name']";
+    public static final String PASSWORD_INPUT_SELECTOR = "//input[@id='password']";
+    public static final String LOGIN_BUTTON_SELECTOR = "//input[@id='login-button']";
+    public static final String ERROR_MESSAGE_SELECTOR = "//h3[@data-test='error']";
 
     private WebDriverWait wait;
 
@@ -32,7 +39,7 @@ public class LoginPage extends AbstractPage {
     public LoginPage(WebDriver driver) {
         super(driver);
 
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(2)); // TODO hardcoded value
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(SECONDS_WAIT_AMOUNT_PARAMETER));
 
         PageFactory.initElements(driver, this);
     }
@@ -63,21 +70,6 @@ public class LoginPage extends AbstractPage {
     }
 
     /**
-     * Clears the login input field.
-     *
-     * @return the {@code LoginPage} instance for method chaining.
-     */
-    public LoginPage clearUserName() {
-        loginField.sendKeys(Keys.chord(Keys.CONTROL, "a"));
-        loginField.sendKeys(Keys.BACK_SPACE);
-        loginField.sendKeys(Keys.ENTER);
-        logger.info("Login input cleared");
-        // TODO add assertion that field is empty
-        return this;
-    }
-    // TODO why not to use clear() method? If it's as like in test case - leave it like that
-
-    /**
      * Enters the password value in the password input field.
      *
      * @param password the password to be entered.
@@ -86,21 +78,30 @@ public class LoginPage extends AbstractPage {
     public LoginPage enterPassword(String password) {
         passwordField.clear();
         passwordField.sendKeys(password);
+
         logger.info("Password was entered inside the password input");
+
+
         return this;
     }
 
     /**
-     * Clears the password input field.
+     * Clears the selected field by its instance provided in method argument.
      *
      * @return the {@code LoginPage} instance for method chaining.
      */
-    public LoginPage clearPassword() {
-        passwordField.sendKeys(Keys.chord(Keys.CONTROL, "a"));
-        passwordField.sendKeys(Keys.BACK_SPACE);
-        passwordField.sendKeys(Keys.ENTER);
-        // TODO add assertion that field is empty
-        logger.info("Password input cleared");
+    public LoginPage clearField(WebElement fieldElement) {
+        //Actual clearing
+        fieldElement.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        fieldElement.sendKeys(Keys.BACK_SPACE);
+        fieldElement.sendKeys(Keys.ENTER);
+
+        //Asserting that field is cleared
+        String fieldValue = fieldElement.getAttribute("value");
+        assertThat("The field is not empty after clearing.", fieldValue, isEmptyOrNullString());
+
+        //Logging
+        logger.info(fieldElement.getAccessibleName() + " field is cleared");
         return this;
     }
 
@@ -110,13 +111,13 @@ public class LoginPage extends AbstractPage {
      *
      * @return the {@code LoginPage} instance for method chaining.
      */
-    public LoginPage clickLogin() {
+    public InventoryPage clickLogin() {
         loginButton.click();
         logger.info("Login button clicked");
-        if(driver.getCurrentUrl().equals(INVENTORY_PAGE_LINK)){
+        if (driver.getCurrentUrl().equals(INVENTORY_PAGE_LINK)) {
             logger.info("Inventory page is open");
         }
-        return this; // TODO if click is successful, you can return InventoryPage, it's a practice of chaining
+        return new InventoryPage(driver);
     }
 
     /**
@@ -132,5 +133,21 @@ public class LoginPage extends AbstractPage {
         return errorMessageElement.getText();
     }
 
+    /**
+     * Gives the WebElement instance of login field on the login page.
+     *
+     * @return the login field as a {@code WebElement}.
+     */
+    public WebElement getLoginField() {
+        return loginField;
+    }
+
+    /**
+     * Gives the WebElement instance of password field on the login page.
+     *
+     * @return the password field as a {@code WebElement}.
+     */
+    public WebElement getPasswordField() {
+        return passwordField;
+    }
 }
-// TODO methods clearUserName() and clearPassword() are similar, you can create one method for both of them, for example clearField(WebElement bla) {}

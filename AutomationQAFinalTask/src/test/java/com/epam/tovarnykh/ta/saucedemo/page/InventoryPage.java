@@ -6,10 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static com.epam.tovarnykh.ta.saucedemo.page.constants.InventoryPageConstants.DASHBOARD_TITLE_SELECTOR;
-import static com.epam.tovarnykh.ta.saucedemo.page.constants.InventoryPageConstants.INVENTORY_PAGE_LINK;
+import static com.epam.tovarnykh.ta.saucedemo.util.Constants.INVENTORY_PAGE_LINK;
 
-public class InventoryPage extends AbstractPage{
+public class InventoryPage extends AbstractPage {
+
+    public static final String DASHBOARD_TITLE_SELECTOR = "//div[@class='app_logo']/parent::div[@class='header_label']";
 
     @FindBy(xpath = DASHBOARD_TITLE_SELECTOR)
     private WebElement title;

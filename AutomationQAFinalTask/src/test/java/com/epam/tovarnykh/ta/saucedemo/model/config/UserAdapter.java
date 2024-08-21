@@ -13,6 +13,8 @@ import java.io.InputStream;
  */
 public class UserAdapter {
 
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
     /**
      * Loads a User configuration from a specified JSON file path.
      * The JSON file should be located in the classpath. This method reads
@@ -23,10 +25,6 @@ public class UserAdapter {
      * @throws IOException If the file is not found or an error occurs during reading.
      */
     public static User loadUserProperty(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        // TODO better to take initialization of ObjectMapper out of the method
-        // TODO it's generally better to reuse a single instance of ObjectMapper as it is thread-safe and can be expensive to create multiple times
-
         try (InputStream inputStream = UserAdapter.class.getClassLoader().getResourceAsStream(filePath)) {
             if (inputStream == null) {
                 throw new IOException("Resource not found: " + filePath);

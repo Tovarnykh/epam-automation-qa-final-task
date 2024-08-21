@@ -8,6 +8,8 @@ public abstract class AbstractPage {
 
     protected static final Logger logger = LoggerFactory.getLogger(LoginPage.class);
 
+    protected static final int SECONDS_WAIT_AMOUNT_PARAMETER = 2;
+
     protected WebDriver driver;
 
     protected abstract AbstractPage openPage();
