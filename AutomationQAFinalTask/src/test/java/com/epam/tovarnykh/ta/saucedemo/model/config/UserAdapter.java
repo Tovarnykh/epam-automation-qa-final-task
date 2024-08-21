@@ -24,6 +24,8 @@ public class UserAdapter {
      */
     public static User loadUserProperty(String filePath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
+        // TODO better to take initialization of ObjectMapper out of the method
+        // TODO it's generally better to reuse a single instance of ObjectMapper as it is thread-safe and can be expensive to create multiple times
 
         try (InputStream inputStream = UserAdapter.class.getClassLoader().getResourceAsStream(filePath)) {
             if (inputStream == null) {

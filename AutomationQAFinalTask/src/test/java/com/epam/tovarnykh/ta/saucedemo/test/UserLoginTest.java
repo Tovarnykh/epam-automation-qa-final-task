@@ -22,7 +22,7 @@ public class UserLoginTest extends CommonConditions {
     @Tag("uc-1")
     public void shouldShowErrorWhenLoginWithEmptyCredentials(User user) {
         //Given: The login page is open
-        setUpBrowser(user.getBrowser());
+        setUpBrowser(user.getBrowser()); // TODO @BeforeEach/@BeforeAll
         loginPage.openPage();
 
         //When: Type any credentials into "Username" & "Password" fields
@@ -40,10 +40,10 @@ public class UserLoginTest extends CommonConditions {
         try {
             assertThat("The login error text does not match the expected error text.",
                     loginPage.retrieveErrorMessageDisplayed(),
-                    is(equalTo(ERROR_MESSAGE_STARTER + "Username is required")));
+                    is(equalTo(ERROR_MESSAGE_STARTER + "Username is required")));// TODO create separate constant
         } catch (NoSuchElementException | TimeoutException e) {
             logger.error("Unable to locate element:" + ERROR_MESSAGE_SELECTOR);
-            if (driver.getCurrentUrl() != LOGIN_PAGE_LINK) {
+            if (driver.getCurrentUrl() != LOGIN_PAGE_LINK) { // TODO refactor to equals
                 throw new AssertionError("Login was successful, the program did not work as planned.");
             } else {
                 throw new AssertionFailedError("The error message did not appear on the page.\n" + e);
@@ -56,7 +56,7 @@ public class UserLoginTest extends CommonConditions {
     @Tag("uc-2")
     public void shouldShowErrorWhenPasswordIsMissing(User user) {
         // Given: The login page is open
-        setUpBrowser(user.getBrowser());
+        setUpBrowser(user.getBrowser()); // TODO @BeforeEach/@BeforeAll
         loginPage.openPage();
 
         // When: Type any credentials in username and password.
@@ -75,10 +75,10 @@ public class UserLoginTest extends CommonConditions {
         try {
             assertThat("The password error text does not match the expected text.",
                     loginPage.retrieveErrorMessageDisplayed(),
-                    is(equalTo(ERROR_MESSAGE_STARTER + "Password is required")));
+                    is(equalTo(ERROR_MESSAGE_STARTER + "Password is required"))); // TODO create separate constants
         } catch (NoSuchElementException e) {
             logger.error("Unable to locate element:" + ERROR_MESSAGE_SELECTOR);
-            if (driver.getCurrentUrl() != LOGIN_PAGE_LINK) {
+            if (driver.getCurrentUrl() != LOGIN_PAGE_LINK) { // TODO refactor to equals
                 throw new AssertionError("Login was successful, the program did not work as planned.");
             } else {
                 throw new AssertionFailedError("The error message did not appear on the page.\n" + e);
@@ -91,14 +91,14 @@ public class UserLoginTest extends CommonConditions {
     @Tag("uc-3")
     public void shouldLoginSuccessfullyWithValidCredentials(User user) {
         // Given: The login page is open
-        setUpBrowser(user.getBrowser());
+        setUpBrowser(user.getBrowser()); // TODO @BeforeEach/@BeforeAll
         loginPage.openPage();
 
         // When: Type credentials in username which are under Accepted username are sections.
-        loginPage.enterUserName("standard_user");
+        loginPage.enterUserName("standard_user"); // TODO hardcoded
 
         //And: Enter password as secret sauce.
-        loginPage.enterPassword("secret_sauce");
+        loginPage.enterPassword("secret_sauce"); // TODO hardcoded
 
         // Then: Click on Login and validate the title “Swag Labs” in the dashboard.
         loginPage.clickLogin();
@@ -108,7 +108,7 @@ public class UserLoginTest extends CommonConditions {
                     is(equalTo("Swag Labs")));
         } catch (NoSuchElementException e) {
             logger.error("Unable to locate element:" + DASHBOARD_TITLE_SELECTOR);
-            if (driver.getCurrentUrl() != INVENTORY_PAGE_LINK) {
+            if (driver.getCurrentUrl() != INVENTORY_PAGE_LINK) { // TODO refactor to equals
                 throw new AssertionError("An attempt to log in into account was unsuccessful.");
             } else {
                 throw new AssertionFailedError(e.toString());
@@ -116,4 +116,7 @@ public class UserLoginTest extends CommonConditions {
         }
     }
 
+
+    // TODO actually no need to try catch them for noSuchElementException, we have assertions, it should fail if element is not found
+    // TODO but all right let it be
 }

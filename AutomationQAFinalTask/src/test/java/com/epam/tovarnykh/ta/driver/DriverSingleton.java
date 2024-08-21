@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
  * WebDriver creation for different browser types.
  */
 public class DriverSingleton {
+    // TODO it's not a Singleton, it just a basic switch statement
+    // TODO to implement a singleton pattern, you need to ensure that only one instance of WebDriver is created and reused throughout the application
 
     /**
      * Returns an instance of WebDriver based on the specified browser type.

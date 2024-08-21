@@ -32,7 +32,7 @@ public class LoginPage extends AbstractPage {
     public LoginPage(WebDriver driver) {
         super(driver);
 
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(2)); // TODO hardcoded value
 
         PageFactory.initElements(driver, this);
     }
@@ -72,8 +72,10 @@ public class LoginPage extends AbstractPage {
         loginField.sendKeys(Keys.BACK_SPACE);
         loginField.sendKeys(Keys.ENTER);
         logger.info("Login input cleared");
+        // TODO add assertion that field is empty
         return this;
     }
+    // TODO why not to use clear() method? If it's as like in test case - leave it like that
 
     /**
      * Enters the password value in the password input field.
@@ -97,6 +99,7 @@ public class LoginPage extends AbstractPage {
         passwordField.sendKeys(Keys.chord(Keys.CONTROL, "a"));
         passwordField.sendKeys(Keys.BACK_SPACE);
         passwordField.sendKeys(Keys.ENTER);
+        // TODO add assertion that field is empty
         logger.info("Password input cleared");
         return this;
     }
@@ -113,7 +116,7 @@ public class LoginPage extends AbstractPage {
         if(driver.getCurrentUrl().equals(INVENTORY_PAGE_LINK)){
             logger.info("Inventory page is open");
         }
-        return this;
+        return this; // TODO if click is successful, you can return InventoryPage, it's a practice of chaining
     }
 
     /**
@@ -130,3 +133,4 @@ public class LoginPage extends AbstractPage {
     }
 
 }
+// TODO methods clearUserName() and clearPassword() are similar, you can create one method for both of them, for example clearField(WebElement bla) {}
