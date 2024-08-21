@@ -9,4 +9,5 @@ public class LoginPageConstants {
     public static final String ERROR_MESSAGE_SELECTOR = "//h3[@data-test='error']";
     public static final String ERROR_MESSAGE_STARTER = "Epic sadface: ";
 
+    // TODO same as in InventoryPageConstants
 }
